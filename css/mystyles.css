@@ -1,0 +1,182 @@
+/**resume content**/
+.subheading{
+    font-weight: normal;
+    font-size: large;
+}
+
+.experience{
+    font-size: medium;
+}
+
+.years{
+    font-size: medium;
+    font-weight: bold;
+}
+
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.navigation2{
+    font-family: Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: large;
+
+ul li {
+  float: right;
+  display: inline;
+}
+
+ul li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 20px 20px;
+  text-decoration: none;
+}
+
+a:link {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #EAEAEA;
+  text-decoration: none;
+}
+
+}
+
+/* about me page*/
+.navigation1 {
+    display: block;
+    width: auto;
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    font-weight: bolder;
+    font-size: large;
+}
+
+/* Navigation list */
+.navigation1 ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.navigation1 ul li {
+    float: right;
+    display: inline;
+}
+
+.navigation1 ul li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    text-decoration: none;
+}
+
+/* Link colors */
+.navigation1 a:link,
+.navigation1 a:visited {
+    color: #4a5e30;
+    text-decoration: none;
+}
+
+.navigation1 a:hover {
+    color: #5f2016;
+    text-decoration: none;
+}
+
+.navigation1 {
+    margin-bottom: 20px;
+}
+
+.page-layout {
+    display: flex;
+    margin-top: 20px; 
+    padding: 20px;
+}
+
+/*sidebar*/
+.sidebar {
+    width: 200px;
+    background: #4a5e30;
+    padding-top: 0px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 8px;
+    height: auto;
+    position: sticky;
+    top: 10px; 
+}
+
+.sidebar a {
+    display: block;
+    margin-bottom: 10px;
+    text-decoration: none;
+    color: #FAF6EF;
+    font-weight: 500;
+    font-size: large;
+}
+
+/* MAIN CONTENT */
+.main-content {
+    flex: 1;
+    padding-left: 40px;
+}
+
+.main-content h1 {
+    margin-top: 0;
+}
+
+.aboutme{
+    font-size: 75px;
+    color: #4a5e30;
+}
+
+.right-image {
+    float: right;
+    width: 300px;       
+    margin-left: 20px;   
+    margin-bottom: 20px;
+    margin-right: 100px;
+    margin-top: 20px;
+    border-style: solid;
+    border-color: #5f2016;
+    border-width: 10px;
+}
+
+
+.back-to-top {
+    display: block;           /* makes it take its own line */
+    width: fit-content;       /* only as wide as text */
+    margin: 20px auto;        /* centers horizontally */
+    padding: 10px 20px;
+    background-color: #4a5e30;
+    color: #FAF6EF;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+    text-align: center;
+
+    float: none !important;      /* overrides any float from nav/global styles */
+    position: static !important; /* ensures it's not fixed or absolute */
+}
+
+
+/*AI web app*/

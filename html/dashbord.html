@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Birthday Dashboard</title>
+<style>
+/* Body and fonts */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #FAF6EF;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Navigation */
+.navigation1 {
+    display: block;
+    width: auto;
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    font-weight: bolder;
+    font-size: large;
+}
+.navigation1 ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+.navigation1 ul li {
+    float: right;
+    display: inline;
+}
+.navigation1 ul li:first-child {
+    float: left;
+}
+.navigation1 ul li a {
+    display: block;
+    color: #4a5e30;
+    text-align: center;
+    padding: 20px;
+    text-decoration: none;
+}
+.navigation1 ul li a:hover {
+    color: #5f2016;
+}
+
+/* Main content & dashboard */
+.main-content {
+    max-width: 900px;
+    margin: auto;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    z-index: 0;
+}
+
+h1 {
+    font-size: 3em;
+    color: #4a5e30;
+    margin-bottom: 10px;
+}
+
+select, input, button {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.2em;
+    padding: 10px 15px;
+    margin: 10px 5px;
+    border-radius: 8px;
+    border: none;
+}
+
+button {
+    cursor: pointer;
+    background-color: #4a5e30;
+    color: #FAF6EF;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #5f2016;
+}
+
+/* Widget styling */
+.widget {
+    border: 2px solid #4a5e30;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 20px 0;
+    background-color: #FAF6EF;
+    text-align: center;
+}
+
+/* Fortune box */
+.fortune-box {
+    margin-top: 20px;
+    min-height: 100px;
+    font-size: 1.5em;
+    color: #4a5e30;
+    line-height: 1.8em;
+    display: none;
+}
+.fortune-text {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 3px solid #5f2016;
+    padding-right: 2px;
+}
+
+/* Year color box */
+.color-box {
+    margin-top: 20px;
+    height: 80px;
+    width: 200px;
+    border-radius: 12px;
+    display: none;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 80px;
+    font-weight: bold;
+    color: #FAF6EF;
+    font-size: 1.2em;
+}
+
+/* Birthstone & flower */
+.birth-info {
+    margin-top: 20px;
+    min-height: 80px;
+    font-size: 1.3em;
+    display: none;
+}
+
+/* Stars */
+@keyframes driftDown {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(100vh); }
+}
+
+.star {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background-color: #FFD700;
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  opacity: 1;
+  z-index: -1;
+  animation: driftDown 20s linear infinite;
+}
+
+/* Back to top button */
+#topBtn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 10;
+    font-size: 18px;
+    background-color: #4a5e30;
+    color: #FAF6EF;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: none;
+}
+#topBtn:hover {
+    background-color: #5f2016;
+}
+</style>
+</head>
+<body>
+<a id="top"></a>
+
+<!-- Navigation -->
+<div class="navigation1 navigatonbox">
+    <ul>
+        <li style="float: left;"><a class="navbar-brand" href="index.html">Mei Li Zackrison</a></li>
+        <li><a href="../html/dashbord.html">Birthday Dashboard</a></li>  
+        <li><a href="../html/about.html">About</a></li>
+        <li><a href="../index.html">Resume</a></li>
+    </ul>
+</div>
+
+<div class="main-content">
+    <h1>Birthday Dashboard</h1>
+
+    <!-- Horoscope widget -->
+    <div class="widget" id="horoscope-widget">
+        <h2>Horoscope</h2>
+        <select id="sign">
+            <option value="aries">Aries</option>
+            <option value="taurus">Taurus</option>
+            <option value="gemini">Gemini</option>
+            <option value="cancer">Cancer</option>
+            <option value="leo">Leo</option>
+            <option value="virgo">Virgo</option>
+            <option value="libra">Libra</option>
+            <option value="scorpio">Scorpio</option>
+            <option value="sagittarius">Sagittarius</option>
+            <option value="capricorn">Capricorn</option>
+            <option value="aquarius">Aquarius</option>
+            <option value="pisces">Pisces</option>
+        </select>
+        <br>
+        <button onclick="tellHoroscope()">Reveal</button>
+        <div class="fortune-box" id="fortune"></div>
+    </div>
+
+    <!-- Pantone Color Widget -->
+    <div class="widget" id="color-widget">
+        <h2>Pantone Color of Your Year</h2>
+        <input type="number" id="birth-year" placeholder="Enter your birth year">
+        <br>
+        <button onclick="showYearColor()">Show Color</button>
+        <div class="color-box" id="year-color"></div>
+        <p id="year-message" style="color:#5f2016; font-weight:bold;"></p>
+    </div>
+
+    <!-- Birthstone & Flower Widget -->
+    <div class="widget" id="birth-widget">
+        <h2>Birthstone & Flower</h2>
+        <select id="birth-month">
+            <option value="1">January</option>
+            <option value="2">February</option>
+            <option value="3">March</option>
+            <option value="4">April</option>
+            <option value="5">May</option>
+            <option value="6">June</option>
+            <option value="7">July</option>
+            <option value="8">August</option>
+            <option value="9">September</option>
+            <option value="10">October</option>
+            <option value="11">November</option>
+            <option value="12">December</option>
+        </select>
+        <br>
+        <button onclick="showBirthInfo()">Reveal</button>
+        <div class="birth-info" id="birth-info"></div>
+    </div>
+</div>
+
+<!-- Back to Top Button -->
+<button onclick="topFunction()" id="topBtn" title="Go to top">Top</button>
+
+<script>
+// Horoscope data
+const fortunes = {
+    aries: [{horoscope:"Today you will discover a new opportunity.", lucky:"Lucky number: 7", color:"Lucky color: Red"}],
+    taurus: [{horoscope:"Patience will reward you soon.", lucky:"Lucky number: 4", color:"Lucky color: Green"}],
+    gemini: [{horoscope:"Expect exciting news!", lucky:"Lucky number: 9", color:"Lucky color: Yellow"}],
+    cancer: [{horoscope:"Trust your instincts today.", lucky:"Lucky number: 2", color:"Lucky color: Silver"}],
+    leo: [{horoscope:"Show your confidence and take a risk.", lucky:"Lucky number: 5", color:"Lucky color: Gold"}],
+    virgo: [{horoscope:"Organization brings success today.", lucky:"Lucky number: 1", color:"Lucky color: Blue"}],
+    libra: [{horoscope:"Balance your time wisely.", lucky:"Lucky number: 8", color:"Lucky color: Pink"}],
+    scorpio: [{horoscope:"Secrets may be revealed.", lucky:"Lucky number: 3", color:"Lucky color: Black"}],
+    sagittarius: [{horoscope:"Adventure is around the corner.", lucky:"Lucky number: 6", color:"Lucky color: Purple"}],
+    capricorn: [{horoscope:"Hard work pays off today.", lucky:"Lucky number: 10", color:"Lucky color: Brown"}],
+    aquarius: [{horoscope:"Innovation leads to recognition.", lucky:"Lucky number: 11", color:"Lucky color: Aqua"}],
+    pisces: [{horoscope:"Creativity flows through you.", lucky:"Lucky number: 12", color:"Lucky color: Sea Green"}]
+};
+
+function tellHoroscope() {
+    const fortuneDiv = document.getElementById("fortune");
+    fortuneDiv.style.display = "block";
+    fortuneDiv.innerHTML = "";
+
+    const sign = document.getElementById("sign").value;
+    const options = fortunes[sign];
+    const randomIndex = Math.floor(Math.random() * options.length);
+    const f = options[randomIndex];
+    const lines = [f.horoscope, f.lucky, f.color];
+
+    function typeLine(line, index) {
+        const span = document.createElement("span");
+        span.className = "fortune-text";
+        fortuneDiv.appendChild(span);
+        let i = 0;
+        function typeChar() {
+            if (i < line.length) {
+                span.innerHTML += line[i];
+                i++;
+                setTimeout(typeChar, 50);
+            } else {
+                span.style.borderRight = "none";
+                fortuneDiv.appendChild(document.createElement("br"));
+                if (index + 1 < lines.length) {
+                    typeLine(lines[index + 1], index + 1);
+                }
+            }
+        }
+        typeChar();
+    }
+
+    typeLine(lines[0], 0);
+}
+
+// Expanded Pantone colors from 1999 onwards
+const pantoneColors = {
+    1999:{name:"Cerulean", hex:"#98B2D1"},
+    2000:{name:"Blue Turquoise", hex:"#53B0AE"},
+    2001:{name:"Fuchsia Rose", hex:"#C74375"},
+    2002:{name:"True Red", hex:"#BF1932"},
+    2003:{name:"Aqua Sky", hex:"#7BC4C4"},
+    2004:{name:"Tigerlily", hex:"#E26D5A"},
+    2005:{name:"Blue Turquoise", hex:"#53B0AE"},
+    2006:{name:"Sand Dollar", hex:"#DECDBE"},
+    2007:{name:"Chili Pepper", hex:"#9B1B30"},
+    2008:{name:"Blue Iris", hex:"#5A5B9F"},
+    2009:{name:"Mimosa", hex:"#F0C05A"},
+    2010:{name:"Turquoise", hex:"#45B5AA"},
+    2011:{name:"Honeysuckle", hex:"#D94F70"},
+    2012:{name:"Tangerine Tango", hex:"#DD4124"},
+    2013:{name:"Emerald", hex:"#50C878"},
+    2014:{name:"Radiant Orchid", hex:"#B163A3"},
+    2015:{name:"Marsala", hex:"#964F4C"},
+    2016:{name:"Rose Quartz & Serenity", hex:"#F7CAC9"},
+    2017:{name:"Greenery", hex:"#88B04B"},
+    2018:{name:"Ultra Violet", hex:"#5F4B8B"},
+    2019:{name:"Living Coral", hex:"#FF6F61"},
+    2020:{name:"Classic Blue", hex:"#34558B"},
+    2021:{name:"Ultimate Gray & Illuminating", hex:"#939597 & #F5DF4D"},
+    2022:{name:"Very Peri", hex:"#6667AB"},
+    2023:{name:"Digital Lavender", hex:"#B497BD"},
+    2024:{name:"Emerald Dream", hex:"#50C878"},
+    2025:{name:"Coral Blush", hex:"#F88379"}
+};
+
+function showYearColor(){
+    const yearInput = document.getElementById('birth-year').value;
+    const colorDiv = document.getElementById('year-color');
+    const yearMsg = document.getElementById('year-message');
+    
+    if(yearInput < 1999){
+        colorDiv.style.display = 'none';
+        yearMsg.innerText = 'Pantone color data is only available from 1999 onwards.';
+    } else if(pantoneColors[yearInput]){
+        colorDiv.style.display = 'block';
+        colorDiv.style.backgroundColor = pantoneColors[yearInput].hex;
+        colorDiv.innerText = pantoneColors[yearInput].name;
+        yearMsg.innerText = '';
+    } else {
+        colorDiv.style.display = 'block';
+        colorDiv.style.backgroundColor = '#4a5e30';
+        colorDiv.innerText = 'Color not found';
+        yearMsg.innerText = '';
+    }
+}
+
+// Birthstone & flower data
+const birthData = {
+    1:{stone:"Garnet", flower:"Carnation"},
+    2:{stone:"Amethyst", flower:"Violet"},
+    3:{stone:"Aquamarine", flower:"Daffodil"},
+    4:{stone:"Diamond", flower:"Daisy"},
+    5:{stone:"Emerald", flower:"Lily of the Valley"},
+    6:{stone:"Pearl", flower:"Rose"},
+    7:{stone:"Ruby", flower:"Larkspur"},
+    8:{stone:"Peridot", flower:"Gladiolus"},
+    9:{stone:"Sapphire", flower:"Aster"},
+    10:{stone:"Opal", flower:"Marigold"},
+    11:{stone:"Topaz", flower:"Chrysanthemum"},
+    12:{stone:"Turquoise", flower:"Narcissus"}
+};
+
+function showBirthInfo() {
+    const month = document.getElementById("birth-month").value;
+    const infoDiv = document.getElementById("birth-info");
+    infoDiv.style.display = "block";
+    infoDiv.innerText = `Birthstone: ${birthData[month].stone}\nBirth Flower: ${birthData[month].flower}`;
+}
+
+// Generate stars
+for(let i = 0; i < 40; i++) {
+    const star = document.createElement('div');
+    star.className = 'star';
+    star.style.top = Math.random() * window.innerHeight + 'px';
+    star.style.left = Math.random() * window.innerWidth + 'px';
+    document.body.appendChild(star);
+}
+
+// Back to top button
+const topBtn = document.getElementById("topBtn");
+window.onscroll = function() {scrollFunction();};
+function scrollFunction() {
+    if(document.body.scrollTop > 200 || document.documentElement.scrollTop > 200){
+        topBtn.style.display = "block";
+    } else {
+        topBtn.style.display = "none";
+    }
+}
+function topFunction() {
+    window.scrollTo({top: 0, behavior: 'smooth'});
+}
+</script>
+</body>
+</html>
